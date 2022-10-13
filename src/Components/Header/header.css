@@ -1,0 +1,13 @@
+.header__box {
+  background: rgba(27, 33, 172, 0.9607843137);
+  border-radius: 10px;
+  max-width: 950px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/*# sourceMappingURL=header.css.map */
