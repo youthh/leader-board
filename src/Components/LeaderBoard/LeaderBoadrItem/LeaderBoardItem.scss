@@ -1,0 +1,36 @@
+.board__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: #F1F1F1;;
+  border: 1px solid #DBDBDB;
+  border-radius: 10px;
+
+  margin-bottom: 10px;
+  &:last-child{
+    margin-bottom: 0;
+  }
+}
+
+.board__item-left{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 200px;
+  width: 100%;
+}
+
+
+.board__item-right{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 110px;
+  width: 100%;
+}
+
+.leaderBoard_container--items{
+  max-width: 800px;
+  width: 100%;
+}

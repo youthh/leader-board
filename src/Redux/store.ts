@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import leaderSlice from "../Slices/leaderSlice";
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    leaderSlice,
+  },
 });
 
 export default store;
