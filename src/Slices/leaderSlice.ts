@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../Redux/store";
 import { getTopLeaders } from "../api/axiosSetup";
-import { ILeader } from "../Components/Header/Leaders";
+import { avatars } from "../images/Avatars/avatars";
 
 export type Leader = {
   name: string;
   score: number | 0;
+  img: string;
 };
 
 export const getLeaderHeader = createAsyncThunk(
@@ -45,15 +46,17 @@ const leaderSlice = createSlice({
     builder.addCase(getLeaderHeader.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.leaders = action.payload.sort((a: Leader, b: Leader) => {
-        if (!Object.hasOwn(a, "score")) {
-          return b.score - 0;
-        } else if (!Object.hasOwn(b, "score")) {
-          return 0 - a.score;
-        } else {
-          return b.score - a.score;
-        }
-      });
+      state.leaders = action.payload
+        .sort((a: Leader, b: Leader) => {
+          if (!Object.hasOwn(a, "score")) {
+            return b.score - 0;
+          } else if (!Object.hasOwn(b, "score")) {
+            return 0 - a.score;
+          } else {
+            return b.score - a.score;
+          }
+        })
+        .map(setLeaderAvatar);
 
       state.leadersAllTime = state.leaders.filter(
         (item: Leader, index: number) => {
@@ -74,6 +77,13 @@ export const leaderSelector = (state: RootState) => {
     isSuccess: state.leaderSlice.isSuccess,
     leaderBoard: state.leaderSlice.leaders,
   };
+};
+
+const setLeaderAvatar = (item: Leader, index: number) => {
+  index++;
+  return Object.assign(item, {
+    img: avatars[index],
+  });
 };
 
 export const { setLeaders } = leaderSlice.actions;

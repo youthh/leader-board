@@ -1,20 +1,20 @@
 import React from "react";
 import "./header.css";
-import person from "../../images/person.svg";
 export interface ILeader {
   score: number | 0;
   name: string;
   index: number;
+  img: string;
 }
 
-const LeaderItem = ({ score, name }: ILeader) => {
+const LeaderItem = ({ score, name, img }: ILeader) => {
   return (
     <div className="header__leader-item" key={Math.random()}>
       <div>
-        <img src={person} alt="" />
+        <img src={img} alt="" />
       </div>
       <div>
-        <h6>
+        <h6 className={"header__leader-item-name"}>
           {name} - {score}
         </h6>
       </div>

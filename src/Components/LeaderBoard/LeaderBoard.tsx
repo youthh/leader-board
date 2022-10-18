@@ -12,10 +12,26 @@ const LeaderBoard = () => {
   useEffect(() => {
     dispatch(getLeaderHeader());
   }, []);
+
+  const onClickEdit = (name: string, score: number): void => {
+    console.log(score);
+  };
+
   return (
-    <div className="leaderBoard_container">
+    <div
+      className="leaderBoard_container"
+      style={
+        isLoading
+          ? { justifyContent: "flex-start" }
+          : { justifyContent: "center" }
+      }
+    >
       <LeaderBoardTop />
-      {isLoading ? <CircularProgress /> : <Board leaders={leaderBoard} />}
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
+        <Board onClickEdit={onClickEdit} leaders={leaderBoard} />
+      )}
     </div>
   );
 };

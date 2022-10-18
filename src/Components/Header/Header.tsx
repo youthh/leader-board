@@ -30,6 +30,7 @@ const Header = () => {
             leaders.map((i, index) => {
               return (
                 <LeaderItem
+                  img={i.img}
                   index={index}
                   key={index}
                   score={i.score}
