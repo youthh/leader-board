@@ -3,8 +3,14 @@ import React from "react";
 import leftActiveArrow from "../../images/LeftActiveArrow.svg";
 import rightActiveArrow from "../../images/LeftActiveArrow.svg";
 import "./LeaderBoard.css";
+import { leaderSelector } from "../../Slices/leaderSlice";
+import { setAddModalUser } from "../../Slices/modalSice";
+import { useAppDispatch } from "../../Redux/hooks";
+import { useSelector } from "react-redux";
 
 const LeaderBoardTop = () => {
+  const { isAddedUserLoading } = useSelector(leaderSelector);
+  const dispatch = useAppDispatch();
   return (
     <div className="leaderBoard_container--top">
       <h2 className="leaderBoard_container-top--title">
@@ -38,8 +44,14 @@ const LeaderBoardTop = () => {
           New day
         </Button>
         <Button
+          onClick={() => {
+            dispatch(setAddModalUser());
+          }}
+          color={"secondary"}
           style={{
             borderRadius: 10,
+            width: "150px",
+            minHeight: "26px",
             padding: "7px 26px",
             fontSize: "11px",
             lineHeight: "12px",

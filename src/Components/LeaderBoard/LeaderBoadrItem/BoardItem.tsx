@@ -1,17 +1,27 @@
 import React from "react";
-import { ILeader } from "../../Header/Leaders";
 import edit from "../../../images/edit.svg";
 import "./LeaderBoardItem.css";
+import { setModal } from "../../../Slices/modalSice";
+import { useDispatch } from "react-redux";
 
-type props = {
+type BoardItemProps = {
   score: number;
   name: string;
   index: number;
+  changesCount: number;
   img: string;
-  onClickEdit: any;
+  color: string;
 };
 
-const BoardItem = ({ score, name, index, img, onClickEdit }: props) => {
+const BoardItem = ({
+  score,
+  name,
+  index,
+  img,
+  changesCount,
+  color,
+}: BoardItemProps) => {
+  const dispatch = useDispatch();
   return (
     <div className="board__item">
       <div className="board__item-left">
@@ -23,10 +33,15 @@ const BoardItem = ({ score, name, index, img, onClickEdit }: props) => {
         <p className="board__item--name">{name}</p>
       </div>
       <div className="board__item-right">
-        <p className={"board__item--textChanges"}>No changes</p>
+        <p
+          className={"board__item--textChanges"}
+          style={{ color: "#" + color }}
+        >
+          {changesCount === 0 ? "no changes" : changesCount + " places"}
+        </p>
         <img
           onClick={() => {
-            onClickEdit(name, score);
+            dispatch(setModal({ name, score }));
           }}
           className="edit__btn"
           src={edit}

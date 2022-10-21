@@ -7,7 +7,7 @@ import { leaderSelector } from "../../Slices/leaderSlice";
 import LeaderItem from "./Leaders";
 
 const Header = () => {
-  const { leaders, isLoading } = useAppSelector(leaderSelector);
+  const { leadersAllTime, isLoading } = useAppSelector(leaderSelector);
 
   return (
     <div className="header__box">
@@ -27,16 +27,18 @@ const Header = () => {
           {isLoading ? (
             <CircularProgress />
           ) : (
-            leaders.map((i, index) => {
-              return (
-                <LeaderItem
-                  img={i.img}
-                  index={index}
-                  key={index}
-                  score={i.score}
-                  name={i.name}
-                />
-              );
+            leadersAllTime.map((leader, index) => {
+              if (index < 4) {
+                return (
+                  <LeaderItem
+                    img={leader.img}
+                    index={index}
+                    key={index}
+                    score={leader.score}
+                    name={leader.name}
+                  />
+                );
+              }
             })
           )}
         </div>

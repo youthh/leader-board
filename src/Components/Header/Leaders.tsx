@@ -1,17 +1,17 @@
 import React from "react";
 import "./header.css";
-export interface ILeader {
-  score: number | 0;
+export interface LeaderItemProps {
+  score: number;
   name: string;
   index: number;
   img: string;
 }
 
-const LeaderItem = ({ score, name, img }: ILeader) => {
+const LeaderItem = ({ score, name, img }: LeaderItemProps) => {
   return (
     <div className="header__leader-item" key={Math.random()}>
       <div>
-        <img src={img} alt="" />
+        <img className="header__img_avatar" src={img} alt="" />
       </div>
       <div>
         <h6 className={"header__leader-item-name"}>

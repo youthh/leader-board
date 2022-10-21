@@ -5,21 +5,21 @@ import "./LeaderBoadrItem/LeaderBoardItem.css";
 
 interface Props {
   leaders: Leader[];
-  onClickEdit: any;
 }
 
-const Board = ({ onClickEdit, leaders }: Props) => {
+const Board = ({ leaders }: Props) => {
   return (
     <div className="leaderBoard_container--items">
-      {leaders.map((i, index) => {
+      {leaders.map((leader, index) => {
         index++;
         return (
           <BoardItem
-            onClickEdit={onClickEdit}
-            img={i.img}
+            color={leader.color}
+            changesCount={leader.changesCount}
+            img={leader.img}
             key={Math.random()}
-            score={Object.hasOwn(i, "score") ? i.score : 0}
-            name={i.name}
+            score={leader.score}
+            name={leader.name}
             index={index}
           />
         );

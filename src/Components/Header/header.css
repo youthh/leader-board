@@ -56,4 +56,9 @@
   min-height: 82px;
 }
 
+.header__img_avatar {
+  width: 60px;
+  height: 58px;
+}
+
 /*# sourceMappingURL=header.css.map */
