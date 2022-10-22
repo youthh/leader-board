@@ -1,16 +1,16 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../Redux/store";
-import { getTopLeaders } from "../api/axiosSetup";
+import { getTopLeaders } from "../api/leadersSerive";
 import { avatars } from "../images/Avatars/avatars";
 
 export type Leader = {
   name: string;
-  score: number | 0;
+  score: number;
   img: string;
 };
 
 export const getLeaderHeader = createAsyncThunk(
-  "header/getLeaderHeader",
+  "leader/getLeaderHeader",
   async () => {
     return await getTopLeaders();
   }
@@ -31,7 +31,7 @@ const initialState: LeaderState = {
 };
 
 const leaderSlice = createSlice({
-  name: "header",
+  name: "leader",
   initialState,
   reducers: {
     setLeaders: (state, action: PayloadAction<Leader[]>) => {
@@ -47,13 +47,13 @@ const leaderSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = true;
       state.leaders = action.payload
-        .sort((a: Leader, b: Leader) => {
-          if (!Object.hasOwn(a, "score")) {
-            return b.score - 0;
-          } else if (!Object.hasOwn(b, "score")) {
-            return 0 - a.score;
+        .sort((previous: Leader, next: Leader) => {
+          if (!Object.hasOwn(previous, "score")) {
+            return next.score;
+          } else if (!Object.hasOwn(next, "score")) {
+            return 0 - previous.score;
           } else {
-            return b.score - a.score;
+            return next.score - previous.score;
           }
         })
         .map(setLeaderAvatar);
@@ -79,9 +79,8 @@ export const leaderSelector = (state: RootState) => {
   };
 };
 
-const setLeaderAvatar = (item: Leader, index: number) => {
-  index++;
-  return Object.assign(item, {
+const setLeaderAvatar = (leader: Leader, index: number) => {
+  return Object.assign(leader, {
     img: avatars[index],
   });
 };

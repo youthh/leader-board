@@ -27,14 +27,14 @@ const Header = () => {
           {isLoading ? (
             <CircularProgress />
           ) : (
-            leaders.map((i, index) => {
+            leaders.map((leader, index) => {
               return (
                 <LeaderItem
-                  img={i.img}
+                  img={leader.img}
                   index={index}
                   key={index}
-                  score={i.score}
-                  name={i.name}
+                  score={leader.score}
+                  name={leader.name}
                 />
               );
             })

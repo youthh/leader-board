@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
 import { getLeaderHeader, leaderSelector } from "../../Slices/leaderSlice";
 import "./LeaderBoard.css";
 import CircularProgress from "@mui/material/CircularProgress/CircularProgress";
+
 const LeaderBoard = () => {
   const dispatch = useAppDispatch();
   const { leaderBoard, isLoading } = useAppSelector(leaderSelector);
@@ -12,10 +13,6 @@ const LeaderBoard = () => {
   useEffect(() => {
     dispatch(getLeaderHeader());
   }, []);
-
-  const onClickEdit = (name: string, score: number): void => {
-    console.log(score);
-  };
 
   return (
     <div
@@ -27,11 +24,7 @@ const LeaderBoard = () => {
       }
     >
       <LeaderBoardTop />
-      {isLoading ? (
-        <CircularProgress />
-      ) : (
-        <Board onClickEdit={onClickEdit} leaders={leaderBoard} />
-      )}
+      {isLoading ? <CircularProgress /> : <Board leaders={leaderBoard} />}
     </div>
   );
 };

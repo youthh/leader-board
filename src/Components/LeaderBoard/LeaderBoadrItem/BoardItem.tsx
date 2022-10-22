@@ -1,17 +1,15 @@
 import React from "react";
-import { ILeader } from "../../Header/Leaders";
 import edit from "../../../images/edit.svg";
 import "./LeaderBoardItem.css";
 
-type props = {
+type BorderItemProps = {
   score: number;
   name: string;
   index: number;
   img: string;
-  onClickEdit: any;
 };
 
-const BoardItem = ({ score, name, index, img, onClickEdit }: props) => {
+const BoardItem = ({ score, name, index, img }: BorderItemProps) => {
   return (
     <div className="board__item">
       <div className="board__item-left">
@@ -24,14 +22,7 @@ const BoardItem = ({ score, name, index, img, onClickEdit }: props) => {
       </div>
       <div className="board__item-right">
         <p className={"board__item--textChanges"}>No changes</p>
-        <img
-          onClick={() => {
-            onClickEdit(name, score);
-          }}
-          className="edit__btn"
-          src={edit}
-          alt=""
-        />
+        <img className="edit__btn" src={edit} alt="" />
       </div>
     </div>
   );
