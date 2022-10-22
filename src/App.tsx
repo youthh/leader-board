@@ -1,6 +1,8 @@
 import React from "react";
 import "./App.css";
+import "./reset.css";
 import Header from "./Components/Header/Header";
+import LeaderBoard from "./Components/LeaderBoard/LeaderBoard";
 
 function App() {
   return (
@@ -8,6 +10,7 @@ function App() {
       <div className="container">
         <div className="inner__app">
           <Header />
+          <LeaderBoard />
         </div>
       </div>
     </div>
