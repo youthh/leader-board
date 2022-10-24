@@ -74,7 +74,6 @@ const leaderSlice = createSlice({
         .sort((previous, next) => {
           return next.score - previous.score;
         });
-
       state.leadersAllTime = state.leaders.filter(
         (leader: Leader, index: number) => {
           return index <= 3 && leader;

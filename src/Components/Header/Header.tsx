@@ -28,17 +28,15 @@ const Header = () => {
             <CircularProgress />
           ) : (
             leadersAllTime.map((leader, index) => {
-              if (index < 4) {
-                return (
-                  <LeaderItem
-                    img={leader.img}
-                    index={index}
-                    key={index}
-                    score={leader.score}
-                    name={leader.name}
-                  />
-                );
-              }
+              return (
+                <LeaderItem
+                  img={leader.img}
+                  index={index}
+                  key={index}
+                  score={leader.score}
+                  name={leader.name}
+                />
+              );
             })
           )}
         </div>
