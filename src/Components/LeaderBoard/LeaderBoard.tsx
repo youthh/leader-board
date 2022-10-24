@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
 import { getLeaderHeader, leaderSelector } from "../../Slices/leaderSlice";
 import "./LeaderBoard.css";
 import CircularProgress from "@mui/material/CircularProgress/CircularProgress";
+
 const LeaderBoard = () => {
   const dispatch = useAppDispatch();
   const { leaderBoard, isLoading } = useAppSelector(leaderSelector);

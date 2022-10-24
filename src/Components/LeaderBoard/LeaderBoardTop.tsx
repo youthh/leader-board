@@ -18,16 +18,20 @@ const LeaderBoardTop = () => {
       </h2>
       <div className="leaderBoard_container--top-right">
         <div className="leaderBoard_container--top_arrows">
-          <img
-            className="leaderBoard_container--top-arrow"
-            src={leftActiveArrow}
-            alt="arrow"
-          />
-          <img
-            className="leaderBoard_container--top-arrow right-arrow"
-            src={rightActiveArrow}
-            alt="arrow"
-          />
+          <button
+            className={"leader__top-arrow"}
+            style={{
+              backgroundImage: `url(${leftActiveArrow})`,
+            }}
+          ></button>
+          <button
+            disabled={true}
+            style={{
+              cursor: "not-allowed",
+              backgroundImage: `url(${rightActiveArrow})`,
+            }}
+            className={"leader__top-arrow right-arrow"}
+          ></button>
         </div>
         <Button
           style={{

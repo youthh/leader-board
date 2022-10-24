@@ -12,8 +12,7 @@ import AlertTitle from "@mui/material/AlertTitle";
 import { useAppDispatch } from "./Redux/hooks";
 
 function App() {
-  const { isModal } = useSelector(modalSelector);
-  const { alertMessage } = useSelector(modalSelector);
+  const { alertMessage, isModal } = useSelector(modalSelector);
   const dispatch = useAppDispatch();
   return (
     <div className="App">

@@ -1,5 +1,6 @@
 import React from "react";
 import "./header.css";
+
 export interface LeaderItemProps {
   score: number;
   name: string;

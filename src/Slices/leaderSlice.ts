@@ -28,14 +28,12 @@ type LeaderState = {
   leadersAllTime: Leader[];
   leaders: Leader[];
   isLoading: boolean;
-  isSuccess: boolean;
   isAddedUserLoading: boolean;
 };
 const initialState: LeaderState = {
   leadersAllTime: [],
   leaders: [],
   isLoading: false,
-  isSuccess: false,
   isAddedUserLoading: false,
 };
 const leaderSlice = createSlice({
@@ -71,7 +69,6 @@ const leaderSlice = createSlice({
     });
     builder.addCase(getLeaderHeader.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.isSuccess = true;
       state.leaders = action.payload
         .map(setLeaderField)
         .sort((previous, next) => {
@@ -108,7 +105,6 @@ export const leaderSelector = (state: RootState) => {
   return {
     leadersAllTime: state.leaderSlice.leadersAllTime,
     isLoading: state.leaderSlice.isLoading,
-    isSuccess: state.leaderSlice.isSuccess,
     leaderBoard: state.leaderSlice.leaders,
     isAddedUserLoading: state.leaderSlice.isAddedUserLoading,
   };
