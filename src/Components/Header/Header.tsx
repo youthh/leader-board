@@ -5,9 +5,11 @@ import CircularProgress from "@mui/material/CircularProgress/CircularProgress";
 import { useAppSelector } from "../../Redux/hooks";
 import { leaderSelector } from "../../Slices/leaderSlice";
 import LeaderItem from "./Leaders";
+import { motion } from "framer-motion";
 
 const Header = () => {
-  const { leadersAllTime, isLoading } = useAppSelector(leaderSelector);
+  const { leadersAllTime, page, isAnotherDayLoading } =
+    useAppSelector(leaderSelector);
 
   return (
     <div className="header__box">
@@ -17,27 +19,32 @@ const Header = () => {
           You can be among the leaders already today
         </p>
         <div
-          className="header_box-leaders"
-          style={
-            isLoading
-              ? { justifyContent: "center" }
-              : { justifyContent: "flex-start" }
-          }
+          className="left_header"
+          style={{
+            justifyContent: isAnotherDayLoading ? "center" : "flex-start",
+          }}
         >
-          {isLoading ? (
+          {isAnotherDayLoading ? (
             <CircularProgress />
           ) : (
-            leadersAllTime.map((leader, index) => {
-              return (
-                <LeaderItem
-                  img={leader.img}
-                  index={index}
-                  key={index}
-                  score={leader.score}
-                  name={leader.name}
-                />
-              );
-            })
+            <motion.div
+              className="header_box-leaders"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {leadersAllTime[page].map((leader, index) => {
+                return (
+                  <LeaderItem
+                    img={leader.img}
+                    index={index}
+                    key={index}
+                    score={leader.score}
+                    name={leader.name}
+                  />
+                );
+              })}
+            </motion.div>
           )}
         </div>
       </div>

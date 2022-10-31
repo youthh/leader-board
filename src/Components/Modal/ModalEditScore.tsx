@@ -1,23 +1,46 @@
 import React, { useRef } from "react";
-import { onSaveScore } from "../../Slices/leaderSlice";
+import {
+  checkIfUserExist,
+  leaderSelector,
+  onSaveScore,
+} from "../../Slices/leaderSlice";
 import { setModal } from "../../Slices/modalSice";
 import person from "../../images/modal/ModalPic.svg";
 import book from "../../images/modal/ModalBook.svg";
 import close from "../../images/modal/close.svg";
 import Button from "@mui/material/Button";
-import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
+import { Resolver, SubmitHandler, useForm } from "react-hook-form";
 
 type Props = {
   modalScore: number;
   modalName: string;
 };
 
+interface FormValues {
+  name: string;
+  score: number;
+}
+
 const ModalEditScore = ({ modalScore, modalName }: Props) => {
-  const dispatch = useDispatch();
-  const refName = useRef<HTMLInputElement>(null);
-  const refScore = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<FormValues>({ mode: "all" });
+  const onSubmit = handleSubmit((data) => {
+    dispatch(
+      onSaveScore({
+        name: data.name,
+        score: data.score,
+      })
+    );
+    dispatch(setModal());
+  });
+
   return (
-    <>
+    <form className="form" onSubmit={onSubmit}>
       <div
         onClick={() => {
           dispatch(setModal());
@@ -31,30 +54,33 @@ const ModalEditScore = ({ modalScore, modalName }: Props) => {
       <div className="modal__box--input">
         <input
           placeholder={"Name"}
-          ref={refName}
           defaultValue={modalName}
           className="modal__input"
           type="text"
+          {...register("name", {
+            required: "Name required field",
+          })}
         />
+        {errors?.name && (
+          <p className="validation__error">{errors.name.message}</p>
+        )}
         <input
           placeholder={"Points"}
-          ref={refScore}
           defaultValue={modalScore}
           className="modal__input"
           step="1"
           type="number"
+          {...register("score", {
+            required: "score required field",
+          })}
         />
       </div>
+      {errors?.score && (
+        <p className="validation__error">{errors.score.message}</p>
+      )}
       <Button
-        onClick={() => {
-          dispatch(setModal());
-          dispatch(
-            onSaveScore({
-              name: refName.current ? refName.current.value : "",
-              score: refScore.current ? parseInt(refScore.current.value) : 0,
-            })
-          );
-        }}
+        type={"submit"}
+        disabled={!isValid}
         style={{
           borderRadius: "10px",
           padding: "8px 20px",
@@ -72,7 +98,7 @@ const ModalEditScore = ({ modalScore, modalName }: Props) => {
       >
         Save
       </Button>
-    </>
+    </form>
   );
 };
 

@@ -26,3 +26,14 @@ export const addNewLeader = (
       return addNewLeader(name);
     });
 };
+
+export const getAnotherDayLeaders = (): Promise<Leader[]> => {
+  return instance
+    .get("starting-state")
+    .then((data) => {
+      return data.data;
+    })
+    .catch(() => {
+      return getAnotherDayLeaders();
+    });
+};

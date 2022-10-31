@@ -1,8 +1,10 @@
-import React from "react";
+import React, { MutableRefObject, useRef } from "react";
 import edit from "../../../images/edit.svg";
 import "./LeaderBoardItem.css";
 import { setModal } from "../../../Slices/modalSice";
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
+import { TransitionStatus } from "react-transition-group";
 
 type BoardItemProps = {
   score: number;
@@ -11,6 +13,8 @@ type BoardItemProps = {
   changesCount: number;
   img: string;
   color: string;
+
+  isAnotherDayLoading: boolean;
 };
 
 const BoardItem = ({
@@ -22,6 +26,7 @@ const BoardItem = ({
   color,
 }: BoardItemProps) => {
   const dispatch = useDispatch();
+
   return (
     <div className="board__item">
       <div className="board__item-left">

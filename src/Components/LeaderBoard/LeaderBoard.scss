@@ -2,12 +2,21 @@
   padding: 24px;
   background: #F6F6F6;
   border-radius: 10px;
-  min-height: 600px;
-
+  min-height: 660px;
+  overflow: hidden;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+}
+
+.boxSpinner{
+  transition: .3s;
+}
+
+
+.boxSpinner--active{
+  transform: translateY(50px);
 }
 
 .leaderBoard_container--top {
@@ -67,4 +76,25 @@
   &:hover {
     transform: rotate(179deg) scale(1.2);
   }
+}
+
+.disabled-arrow{
+  opacity: 0.5;
+  cursor: not-allowed;
+
+  &:hover{
+    transform: scale(1);
+  }
+}
+
+.leader__top-arrow.right-arrow.disabled-arrow{
+  &:hover {
+    transform: rotate(179deg) scale(1);
+  }
+}
+
+
+.leader_board-top-date{
+  font-size: 16px;
+  margin-left: 10px;
 }

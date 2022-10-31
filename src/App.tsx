@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import "./Components/Alerts/AlertStyle.css";
 import "./reset.css";
 import Header from "./Components/Header/Header";
 import LeaderBoard from "./Components/LeaderBoard/LeaderBoard";

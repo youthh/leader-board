@@ -3,41 +3,64 @@ import React from "react";
 import leftActiveArrow from "../../images/LeftActiveArrow.svg";
 import rightActiveArrow from "../../images/LeftActiveArrow.svg";
 import "./LeaderBoard.css";
-import { leaderSelector } from "../../Slices/leaderSlice";
 import { setAddModalUser } from "../../Slices/modalSice";
 import { useAppDispatch } from "../../Redux/hooks";
-import { useSelector } from "react-redux";
+import { addNewDay, Leader } from "../../Slices/leaderSlice";
 
-const LeaderBoardTop = () => {
-  const { isAddedUserLoading } = useSelector(leaderSelector);
+type LeaderBoardTopProps = {
+  leaders: [Leader[]];
+  page: number;
+  isAnotherDayLoading: boolean;
+  changePage: (a: number) => void;
+};
+const LeaderBoardTop = ({
+  leaders,
+  page,
+  isAnotherDayLoading,
+  changePage,
+}: LeaderBoardTopProps) => {
   const dispatch = useAppDispatch();
+
   return (
     <div className="leaderBoard_container--top">
       <h2 className="leaderBoard_container-top--title">
-        Leaders table for this period
+        Leaders table for this period: {page + 1}
       </h2>
       <div className="leaderBoard_container--top-right">
         <div className="leaderBoard_container--top_arrows">
           <button
-            className={"leader__top-arrow"}
+            disabled={!page && isAnotherDayLoading}
+            className={"leader__top-arrow" + (!page ? " disabled-arrow" : "")}
+            onClick={() => {
+              page && changePage(-1);
+            }}
             style={{
               backgroundImage: `url(${leftActiveArrow})`,
             }}
           ></button>
           <button
-            disabled={true}
+            disabled={page + 1 === leaders.length}
+            onClick={() => {
+              changePage(1);
+            }}
             style={{
-              cursor: "not-allowed",
               backgroundImage: `url(${rightActiveArrow})`,
             }}
-            className={"leader__top-arrow right-arrow"}
+            className={
+              "leader__top-arrow right-arrow " +
+              (page + 1 === leaders.length ? " disabled-arrow" : "")
+            }
           ></button>
         </div>
         <Button
+          onClick={() => {
+            dispatch(addNewDay());
+          }}
           style={{
             borderRadius: 10,
             padding: "7px 26px",
             fontSize: "11px",
+            width: "120px",
             lineHeight: "12px",
             background: "#F99746",
             marginRight: "8px",
