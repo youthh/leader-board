@@ -8,6 +8,8 @@ import BasicModal from "./Components/Modal/Modal";
 import { useSelector } from "react-redux";
 import { modalSelector } from "./Slices/modalSice";
 import Alert from "./Components/Alerts/Alert";
+import ModalAddUser from "./Components/Modal/ModalAddUser";
+import ModalEditScore from "./Components/Modal/ModalEditScore";
 
 function App() {
   const { alertMessage, isModal } = useSelector(modalSelector);
@@ -17,7 +19,12 @@ function App() {
         <div className="inner__app">
           <Header />
           <LeaderBoard />
-          {isModal && <BasicModal />}
+          {isModal && (
+            <BasicModal>
+              <ModalAddUser />
+              <ModalEditScore />
+            </BasicModal>
+          )}
         </div>
       </div>
       {alertMessage.isShow && <Alert alertMessage={alertMessage} />}

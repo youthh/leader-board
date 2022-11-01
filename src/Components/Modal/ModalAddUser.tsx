@@ -7,26 +7,26 @@ import {
   Leader,
   leaderSelector,
 } from "../../Slices/leaderSlice";
-import { setAddModalUser, setAlert } from "../../Slices/modalSice";
+import {
+  modalSelector,
+  setAddModalUser,
+  setAlert,
+} from "../../Slices/modalSice";
 import close from "../../images/modal/close.svg";
 import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
-
-type ModalAddUserProps = {
-  leaders: [Leader[]];
-};
 
 type FormValues = {
   name: string;
 };
 
-const ModalAddUser = ({ leaders }: ModalAddUserProps) => {
+const ModalAddUser = () => {
+  const { isAddUser } = useAppSelector(modalSelector);
   const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<FormValues>({ mode: "all" });
-  const { page } = useAppSelector(leaderSelector);
   const onSubmit = handleSubmit((data) => {
     dispatch(addNewLeaderThunk(data.name)).then(() => {
       dispatch(
@@ -36,7 +36,7 @@ const ModalAddUser = ({ leaders }: ModalAddUserProps) => {
     dispatch(setAddModalUser());
   });
 
-  return (
+  return isAddUser ? (
     <>
       <form className={"form"} onSubmit={onSubmit}>
         <div
@@ -82,6 +82,8 @@ const ModalAddUser = ({ leaders }: ModalAddUserProps) => {
         </Button>
       </form>
     </>
+  ) : (
+    <></>
   );
 };
 

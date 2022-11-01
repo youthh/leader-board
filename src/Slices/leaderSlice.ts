@@ -2,6 +2,10 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../Redux/store";
 import { avatars } from "../images/Avatars/avatars";
 import { addNewLeader, getTopLeaders } from "../api/leadersService";
+import {
+  addFieldAndSort,
+  onSaveScoreLogic,
+} from "../Components/Logic/logicLeaderSlice";
 
 export type Leader = {
   name: string;
@@ -36,7 +40,6 @@ type LeaderState = {
   isAddedUserLoading: boolean;
   isAnotherDayLoading: boolean;
   page: number;
-  currentDay: number;
 };
 const initialState: LeaderState = {
   leadersAllTime: [[]],
@@ -46,7 +49,6 @@ const initialState: LeaderState = {
   isAddedUserLoading: false,
   isAnotherDayLoading: false,
   page: 0,
-  currentDay: 0,
 };
 const leaderSlice = createSlice({
   name: "leaderSlice",
@@ -56,36 +58,21 @@ const leaderSlice = createSlice({
       state,
       action: PayloadAction<{ name: string; score: number }>
     ) => {
-      state.maxScoreLeaders[state.page].map((leader) => {
-        if (
-          leader.name === action.payload.name &&
-          leader.score < action.payload.score
-        ) {
-          leader.score = action.payload.score;
-        }
-      });
-      state.leadersAllTime[state.page] = state.maxScoreLeaders[state.page]
-        .sort((prev, next) => next.score - prev.score)
-        .slice(0, 4);
+      state.leadersAllTime[state.page] = onSaveScoreLogic.changeHighestScore(
+        state.leadersAllTime[state.page],
+        action.payload
+      );
 
-      state.leaders[state.page].map((leader) => {
-        if (leader.name === action.payload.name) {
-          leader.score = action.payload.score;
-        }
-      });
+      state.leaders[state.page] = onSaveScoreLogic.changeLeaderScore(
+        state.leaders[state.page],
+        action.payload
+      );
       const oldPositionLeaders: Leader[] = [...state.leaders[state.page]];
-      const color = randomColor[Math.floor(Math.random() * 12)];
 
-      state.leaders[state.page]
-        .sort((previous, next) => {
-          return next.score - previous.score;
-        })
-        .map((leader, index) => {
-          if (oldPositionLeaders.indexOf(leader) - index !== 0) {
-            leader.changesCount = oldPositionLeaders.indexOf(leader) - index;
-            leader.color = color;
-          }
-        });
+      state.leaders[state.page] = onSaveScoreLogic.checkLeaderPosition(
+        oldPositionLeaders,
+        state.leaders[state.page]
+      );
     },
     setPage: (state, action: PayloadAction<number>) => {
       state.page += action.payload;
@@ -101,43 +88,35 @@ const leaderSlice = createSlice({
     });
     builder.addCase(getLeaderHeader.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.leaders[0] = action.payload
-        .map(setLeaderField)
-        .sort((previous, next) => {
-          return next.score - previous.score;
-        });
-      state.maxScoreLeaders[state.page] = JSON.parse(
-        JSON.stringify(state.leaders[0])
-      );
-      state.leadersAllTime[state.page] = state.leaders[0].slice(0, 4);
+      state.leaders[0] = addFieldAndSort(action.payload);
+      state.leadersAllTime = JSON.parse(JSON.stringify(state.leaders));
     });
     builder.addCase(addNewLeaderThunk.pending, (state) => {
       state.isAddedUserLoading = true;
     });
     builder.addCase(addNewLeaderThunk.fulfilled, (state, action) => {
       state.isAddedUserLoading = false;
-      const name = action.payload["display-name"];
-      state.leaders[state.page].push({
-        name,
+
+      const leader = {
+        name: action.payload["display-name"].toLowerCase(),
         score: 0,
         img: avatars[Math.floor(Math.random() * 8)],
         changesCount: 0,
         color: "",
-      });
+      };
+      state.leaders[state.page].push(leader);
+      state.leadersAllTime[state.page].push(JSON.parse(JSON.stringify(leader)));
     });
     builder.addCase(addNewDay.pending, (state) => {
       state.isAnotherDayLoading = true;
     });
     builder.addCase(addNewDay.fulfilled, (state, action) => {
       state.isAnotherDayLoading = false;
-      const leaders = action.payload
-        .map(setLeaderField)
-        .sort((previous, next) => {
-          return next.score - previous.score;
-        });
-      state.leaders.push(leaders);
-      state.leadersAllTime.push(leaders.slice(0, 4));
-      state.maxScoreLeaders.push(JSON.parse(JSON.stringify(leaders)));
+      const leaders = addFieldAndSort(action.payload);
+      state.leaders.push(
+        onSaveScoreLogic.checkLeaderPosition(state.leaders[state.page], leaders)
+      );
+      state.leadersAllTime.push(JSON.parse(JSON.stringify(leaders)));
       state.page = state.leaders.length - 1;
     });
   },
@@ -154,30 +133,21 @@ export const leaderSelector = (state: RootState) => {
   };
 };
 
-const setLeaderField = (leader: Leader, index: number) => {
-  return Object.assign(leader, {
-    img: avatars[index],
-    color: "#F99746",
-    changesCount: 0,
-    score: Object.hasOwn(leader, "score") ? leader.score : 0,
-  });
-};
+// export const checkIfUserExist = (
+//   leaders: [Leader[]],
+//   name: string,
+//   page: number
+// ) => {
+//   let isExist = false;
+//   leaders[page].forEach((leader) => {
+//     if (leader.name.toLowerCase() === name.toLowerCase()) {
+//       isExist = true;
+//     }
+//   });
+//   return isExist;
+// };
 
-export const checkIfUserExist = (
-  leaders: [Leader[]],
-  name: string,
-  page: number
-) => {
-  let isExist = false;
-  leaders[page].forEach((leader) => {
-    if (leader.name.toLowerCase() === name.toLowerCase()) {
-      isExist = true;
-    }
-  });
-  return isExist;
-};
-
-const randomColor = [
+export const randomColor = [
   "000000",
   "1D1CE5",
   "EA047E",

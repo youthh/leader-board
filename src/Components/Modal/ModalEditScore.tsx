@@ -1,28 +1,22 @@
 import React, { useRef } from "react";
-import {
-  checkIfUserExist,
-  leaderSelector,
-  onSaveScore,
-} from "../../Slices/leaderSlice";
-import { setModal } from "../../Slices/modalSice";
+import { onSaveScore } from "../../Slices/leaderSlice";
+import { modalSelector, setModal } from "../../Slices/modalSice";
 import person from "../../images/modal/ModalPic.svg";
 import book from "../../images/modal/ModalBook.svg";
 import close from "../../images/modal/close.svg";
 import Button from "@mui/material/Button";
 import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
 import { Resolver, SubmitHandler, useForm } from "react-hook-form";
-
-type Props = {
-  modalScore: number;
-  modalName: string;
-};
+import { useSelector } from "react-redux";
 
 interface FormValues {
   name: string;
   score: number;
 }
 
-const ModalEditScore = ({ modalScore, modalName }: Props) => {
+const ModalEditScore = () => {
+  const { modalScore, modalName, isShowEditScoreModal } =
+    useSelector(modalSelector);
   const dispatch = useAppDispatch();
   const {
     register,
@@ -39,7 +33,7 @@ const ModalEditScore = ({ modalScore, modalName }: Props) => {
     dispatch(setModal());
   });
 
-  return (
+  return isShowEditScoreModal ? (
     <form className="form" onSubmit={onSubmit}>
       <div
         onClick={() => {
@@ -99,6 +93,8 @@ const ModalEditScore = ({ modalScore, modalName }: Props) => {
         Save
       </Button>
     </form>
+  ) : (
+    <></>
   );
 };
 

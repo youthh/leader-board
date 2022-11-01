@@ -33,7 +33,7 @@ const Header = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              {leadersAllTime[page].map((leader, index) => {
+              {leadersAllTime[page].slice(0, 4).map((leader, index) => {
                 return (
                   <LeaderItem
                     img={leader.img}

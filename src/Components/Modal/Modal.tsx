@@ -1,11 +1,8 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { leaderSelector } from "../../Slices/leaderSlice";
 import { useSelector } from "react-redux";
 import "./Modal.css";
-import ModalEditScore from "./ModalEditScore";
-import ModalAddUser from "./ModalAddUser";
 import { modalSelector } from "../../Slices/modalSice";
 
 const style = {
@@ -27,10 +24,12 @@ const style = {
   flexDirection: "column",
 };
 
-const BasicModal = () => {
-  const { isModal, modalScore, modalName, isAddUser } =
-    useSelector(modalSelector);
-  const { leaderBoard } = useSelector(leaderSelector);
+type ModalProps = {
+  children: React.ReactNode[];
+};
+
+const BasicModal = ({ children }: ModalProps) => {
+  const { isModal } = useSelector(modalSelector);
   return (
     <div>
       <Modal
@@ -38,13 +37,7 @@ const BasicModal = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          {isAddUser ? (
-            <ModalAddUser leaders={leaderBoard} />
-          ) : (
-            <ModalEditScore modalScore={modalScore} modalName={modalName} />
-          )}
-        </Box>
+        <Box sx={style}>{children.map((child) => child)}</Box>
       </Modal>
     </div>
   );

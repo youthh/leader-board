@@ -8,6 +8,7 @@ type ModalState = {
   modalScore: number;
   isAddUser: boolean;
   alertMessage: { severity: AlertColor; message: string; isShow: boolean };
+  isShowEditScoreModal: boolean;
 };
 
 const initialState: ModalState = {
@@ -15,6 +16,7 @@ const initialState: ModalState = {
   modalName: "",
   modalScore: 0,
   isAddUser: false,
+  isShowEditScoreModal: false,
   alertMessage: { severity: "error", message: "", isShow: false },
 };
 
@@ -42,6 +44,7 @@ const modalSlice = createSlice({
       action: PayloadAction<{ name: string; score: number } | undefined>
     ) => {
       state.isModal = !state.isModal;
+      state.isShowEditScoreModal = !state.isShowEditScoreModal;
       state.modalName = action.payload ? action.payload.name : "";
       state.modalScore = action.payload ? action.payload.score : 0;
     },
@@ -55,6 +58,7 @@ export const modalSelector = (state: RootState) => {
     modalScore: state.modalSlice.modalScore,
     isAddUser: state.modalSlice.isAddUser,
     alertMessage: state.modalSlice.alertMessage,
+    isShowEditScoreModal: state.modalSlice.isShowEditScoreModal,
   };
 };
 
