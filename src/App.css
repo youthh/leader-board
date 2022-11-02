@@ -14,9 +14,7 @@ body {
 }
 
 .inner__app {
-  max-width: 810px;
+  max-width: 840px;
   width: 100%;
   margin: 0 auto;
 }
-
-/*# sourceMappingURL=app.css.map */

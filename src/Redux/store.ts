@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import leaderSlice from "../Slices/leaderSlice";
+import modalSlice from "../Slices/modalSice";
 
 const store = configureStore({
   reducer: {
     leaderSlice,
+    modalSlice,
   },
 });
 

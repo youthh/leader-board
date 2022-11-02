@@ -1,5 +1,6 @@
-.header__box {
-  background: rgba(27, 33, 172, 0.9607843137);
+.header__box{
+
+  background: #1B21ACF5;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
@@ -7,53 +8,66 @@
   margin: 23px auto;
   padding: 18px 23px;
   color: #EFEFEF;
+
 }
 
-.header_title {
+.header_title{
   font-weight: 600;
   font-size: 34px;
   line-height: 40px;
   margin-bottom: 12px;
 }
 
-.header__text {
+.header__text{
   font-weight: 400;
   font-size: 17px;
   line-height: 17px;
   margin-bottom: 10px;
 }
 
-.header__leader-item-name {
+.header__leader-item-name{
   color: #EFEFEF;
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
 }
 
-.header_box--img {
+.header_box--img{
   position: relative;
   max-width: 332px;
   width: 100%;
   min-height: 180px;
+
 }
 
-.header__img {
+.header__img{
   position: absolute;
   bottom: -18px;
+
 }
 
-.header__leader-item {
+
+.header__leader-item{
   text-align: center;
   margin-right: 15px;
-}
-.header__leader-item:last-child {
-  margin-right: 0;
+  &:last-child{
+    margin-right: 0;
+  }
 }
 
-.header_box-leaders {
+.header_box-leaders{
   display: flex;
   align-items: center;
   min-height: 82px;
 }
 
-/*# sourceMappingURL=header.css.map */
+.header__img_avatar{
+  width: 60px;
+  height: 58px;
+}
+
+.left_header{
+  display: flex;
+  align-items: center;
+  min-height: 82px;
+}

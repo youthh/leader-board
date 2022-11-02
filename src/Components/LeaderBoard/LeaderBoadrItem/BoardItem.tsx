@@ -1,15 +1,32 @@
-import React from "react";
+import React, { MutableRefObject, useRef } from "react";
 import edit from "../../../images/edit.svg";
 import "./LeaderBoardItem.css";
+import { setModal } from "../../../Slices/modalSice";
+import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
+import { TransitionStatus } from "react-transition-group";
 
-type BorderItemProps = {
+type BoardItemProps = {
   score: number;
   name: string;
   index: number;
+  changesCount: number;
   img: string;
+  color: string;
+
+  isAnotherDayLoading: boolean;
 };
 
-const BoardItem = ({ score, name, index, img }: BorderItemProps) => {
+const BoardItem = ({
+  score,
+  name,
+  index,
+  img,
+  changesCount,
+  color,
+}: BoardItemProps) => {
+  const dispatch = useDispatch();
+
   return (
     <div className="board__item">
       <div className="board__item-left">
@@ -21,8 +38,20 @@ const BoardItem = ({ score, name, index, img }: BorderItemProps) => {
         <p className="board__item--name">{name}</p>
       </div>
       <div className="board__item-right">
-        <p className={"board__item--textChanges"}>No changes</p>
-        <img className="edit__btn" src={edit} alt="" />
+        <p
+          className={"board__item--textChanges"}
+          style={{ color: "#" + color }}
+        >
+          {changesCount === 0 ? "no changes" : changesCount + " places"}
+        </p>
+        <img
+          onClick={() => {
+            dispatch(setModal({ name, score }));
+          }}
+          className="edit__btn"
+          src={edit}
+          alt=""
+        />
       </div>
     </div>
   );
