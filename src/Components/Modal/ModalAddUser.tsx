@@ -20,7 +20,7 @@ type FormValues = {
 };
 
 const ModalAddUser = () => {
-  const { isAddUser } = useAppSelector(modalSelector);
+  const { isShowAddUserModal } = useAppSelector(modalSelector);
   const dispatch = useAppDispatch();
   const {
     register,
@@ -29,14 +29,14 @@ const ModalAddUser = () => {
   } = useForm<FormValues>({ mode: "all" });
   const onSubmit = handleSubmit((data) => {
     dispatch(addNewLeaderThunk(data.name)).then(() => {
-      dispatch(
-        setAlert({ severity: "success", message: "User successfully added" })
-      );
+      dispatch(setAlert());
     });
-    dispatch(setAddModalUser());
+    setTimeout(() => {
+      dispatch(setAddModalUser());
+    }, 2000);
   });
 
-  return isAddUser ? (
+  return isShowAddUserModal ? (
     <>
       <form className={"form"} onSubmit={onSubmit}>
         <div

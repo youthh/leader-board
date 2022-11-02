@@ -34,7 +34,6 @@ export const addNewDay = createAsyncThunk("leaderSlice/addNewDay", async () => {
 
 type LeaderState = {
   leadersAllTime: [Leader[]];
-  maxScoreLeaders: [Leader[]];
   leaders: [Leader[]];
   isLoading: boolean;
   isAddedUserLoading: boolean;
@@ -44,7 +43,6 @@ type LeaderState = {
 const initialState: LeaderState = {
   leadersAllTime: [[]],
   leaders: [[]],
-  maxScoreLeaders: [[]],
   isLoading: false,
   isAddedUserLoading: false,
   isAnotherDayLoading: false,
@@ -132,36 +130,6 @@ export const leaderSelector = (state: RootState) => {
     isAnotherDayLoading: state.leaderSlice.isAnotherDayLoading,
   };
 };
-
-// export const checkIfUserExist = (
-//   leaders: [Leader[]],
-//   name: string,
-//   page: number
-// ) => {
-//   let isExist = false;
-//   leaders[page].forEach((leader) => {
-//     if (leader.name.toLowerCase() === name.toLowerCase()) {
-//       isExist = true;
-//     }
-//   });
-//   return isExist;
-// };
-
-export const randomColor = [
-  "000000",
-  "1D1CE5",
-  "EA047E",
-  "9A1663",
-  "367E18",
-  "D2001A",
-  "A460ED",
-  "472D2D",
-  "554994",
-  "F65A83",
-  "59CE8F",
-  "5BB318",
-  "495C83",
-];
 
 export const { onSaveScore, setPage, setLeadersLoading } = leaderSlice.actions;
 

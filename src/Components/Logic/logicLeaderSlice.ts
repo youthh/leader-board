@@ -1,4 +1,4 @@
-import { Leader, randomColor } from "../../Slices/leaderSlice";
+import { Leader } from "../../Slices/leaderSlice";
 import { avatars } from "../../images/Avatars/avatars";
 
 export const onSaveScoreLogic = {
@@ -67,3 +67,18 @@ const setLeaderField = (leader: Leader, index: number) => {
     score: Object.hasOwn(leader, "score") ? leader.score : 0,
   });
 };
+const randomColor = [
+  "000000",
+  "1D1CE5",
+  "EA047E",
+  "9A1663",
+  "367E18",
+  "D2001A",
+  "A460ED",
+  "472D2D",
+  "554994",
+  "F65A83",
+  "59CE8F",
+  "5BB318",
+  "495C83",
+];

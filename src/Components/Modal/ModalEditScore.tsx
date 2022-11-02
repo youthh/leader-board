@@ -5,8 +5,8 @@ import person from "../../images/modal/ModalPic.svg";
 import book from "../../images/modal/ModalBook.svg";
 import close from "../../images/modal/close.svg";
 import Button from "@mui/material/Button";
-import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
-import { Resolver, SubmitHandler, useForm } from "react-hook-form";
+import { useAppDispatch } from "../../Redux/hooks";
+import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 
 interface FormValues {

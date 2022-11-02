@@ -4,6 +4,7 @@ import Modal from "@mui/material/Modal";
 import { useSelector } from "react-redux";
 import "./Modal.css";
 import { modalSelector } from "../../Slices/modalSice";
+import Alert from "../Alerts/Alert";
 
 const style = {
   position: "absolute" as const,
@@ -29,16 +30,20 @@ type ModalProps = {
 };
 
 const BasicModal = ({ children }: ModalProps) => {
-  const { isModal } = useSelector(modalSelector);
+  const { isShowModal, isShowModalAlertMessage } = useSelector(modalSelector);
   return (
     <div>
       <Modal
-        open={isModal}
+        open={isShowModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>{children.map((child) => child)}</Box>
       </Modal>
+
+      {isShowModalAlertMessage && (
+        <Alert isShowModalAlertMessage={isShowModalAlertMessage} />
+      )}
     </div>
   );
 };

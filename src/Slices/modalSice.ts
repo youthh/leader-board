@@ -3,21 +3,21 @@ import { AlertColor } from "@mui/material";
 import { RootState } from "../Redux/store";
 
 type ModalState = {
-  isModal: boolean;
+  isShowModal: boolean;
   modalName: string;
   modalScore: number;
-  isAddUser: boolean;
-  alertMessage: { severity: AlertColor; message: string; isShow: boolean };
+  isShowAddUserModal: boolean;
+  isShowModalAlertMessage: boolean;
   isShowEditScoreModal: boolean;
 };
 
 const initialState: ModalState = {
-  isModal: false,
+  isShowModal: false,
   modalName: "",
   modalScore: 0,
-  isAddUser: false,
+  isShowAddUserModal: false,
   isShowEditScoreModal: false,
-  alertMessage: { severity: "error", message: "", isShow: false },
+  isShowModalAlertMessage: false,
 };
 
 const modalSlice = createSlice({
@@ -25,25 +25,20 @@ const modalSlice = createSlice({
   initialState,
   reducers: {
     closeAlert: (state, action) => {
-      state.alertMessage.isShow = action.payload;
+      state.isShowModalAlertMessage = action.payload;
     },
-    setAlert: (
-      state,
-      action: PayloadAction<{ severity: AlertColor; message: string }>
-    ) => {
-      state.alertMessage.isShow = true;
-      state.alertMessage.severity = action.payload.severity;
-      state.alertMessage.message = action.payload.message;
+    setAlert: (state) => {
+      state.isShowModalAlertMessage = true;
     },
     setAddModalUser: (state) => {
-      state.isModal = !state.isModal;
-      state.isAddUser = !state.isAddUser;
+      state.isShowModal = !state.isShowModal;
+      state.isShowAddUserModal = !state.isShowAddUserModal;
     },
     setModal: (
       state,
       action: PayloadAction<{ name: string; score: number } | undefined>
     ) => {
-      state.isModal = !state.isModal;
+      state.isShowModal = !state.isShowModal;
       state.isShowEditScoreModal = !state.isShowEditScoreModal;
       state.modalName = action.payload ? action.payload.name : "";
       state.modalScore = action.payload ? action.payload.score : 0;
@@ -53,11 +48,11 @@ const modalSlice = createSlice({
 
 export const modalSelector = (state: RootState) => {
   return {
-    isModal: state.modalSlice.isModal,
+    isShowModal: state.modalSlice.isShowModal,
     modalName: state.modalSlice.modalName,
     modalScore: state.modalSlice.modalScore,
-    isAddUser: state.modalSlice.isAddUser,
-    alertMessage: state.modalSlice.alertMessage,
+    isShowAddUserModal: state.modalSlice.isShowAddUserModal,
+    isShowModalAlertMessage: state.modalSlice.isShowModalAlertMessage,
     isShowEditScoreModal: state.modalSlice.isShowEditScoreModal,
   };
 };

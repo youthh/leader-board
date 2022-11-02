@@ -12,14 +12,14 @@ import ModalAddUser from "./Components/Modal/ModalAddUser";
 import ModalEditScore from "./Components/Modal/ModalEditScore";
 
 function App() {
-  const { alertMessage, isModal } = useSelector(modalSelector);
+  const { isShowModal } = useSelector(modalSelector);
   return (
     <div className="App">
       <div className="container">
         <div className="inner__app">
           <Header />
           <LeaderBoard />
-          {isModal && (
+          {isShowModal && (
             <BasicModal>
               <ModalAddUser />
               <ModalEditScore />
@@ -27,7 +27,6 @@ function App() {
           )}
         </div>
       </div>
-      {alertMessage.isShow && <Alert alertMessage={alertMessage} />}
     </div>
   );
 }
