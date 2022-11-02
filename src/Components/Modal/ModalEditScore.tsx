@@ -93,9 +93,7 @@ const ModalEditScore = () => {
         Save
       </Button>
     </form>
-  ) : (
-    <></>
-  );
+  ) : null;
 };
 
 export default ModalEditScore;

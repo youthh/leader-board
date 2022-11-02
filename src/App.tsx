@@ -7,7 +7,6 @@ import LeaderBoard from "./Components/LeaderBoard/LeaderBoard";
 import BasicModal from "./Components/Modal/Modal";
 import { useSelector } from "react-redux";
 import { modalSelector } from "./Slices/modalSice";
-import Alert from "./Components/Alerts/Alert";
 import ModalAddUser from "./Components/Modal/ModalAddUser";
 import ModalEditScore from "./Components/Modal/ModalEditScore";
 

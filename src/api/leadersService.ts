@@ -1,14 +1,20 @@
 import { Leader } from "../Slices/leaderSlice";
 import { instance } from "./axiosSetup";
 
-export const getTopLeaders = (): Promise<Leader[]> => {
+export const getTopLeaders = (counter = 0): Promise<Leader[]> => {
+  counter++;
+  if (counter === 5) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return;
+  }
   return instance
     .get<Leader[]>("starting-state")
-    .then((data) => {
-      return data.data;
+    .then((response) => {
+      return response.data;
     })
     .catch(() => {
-      return getTopLeaders();
+      return getTopLeaders(counter);
     });
 };
 
@@ -24,16 +30,5 @@ export const addNewLeader = (
     })
     .catch(() => {
       return addNewLeader(name);
-    });
-};
-
-export const getAnotherDayLeaders = (): Promise<Leader[]> => {
-  return instance
-    .get("starting-state")
-    .then((data) => {
-      return data.data;
-    })
-    .catch(() => {
-      return getAnotherDayLeaders();
     });
 };

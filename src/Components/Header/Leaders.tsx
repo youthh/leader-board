@@ -1,5 +1,5 @@
 import React from "react";
-import "./header.css";
+import "./_header.css";
 
 export interface LeaderItemProps {
   score: number;

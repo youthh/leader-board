@@ -26,25 +26,25 @@ const style = {
 };
 
 type ModalProps = {
-  children: React.ReactNode[];
+  children: React.ReactNode;
 };
 
 const BasicModal = ({ children }: ModalProps) => {
   const { isShowModal, isShowModalAlertMessage } = useSelector(modalSelector);
   return (
-    <div>
+    <>
       <Modal
         open={isShowModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>{children.map((child) => child)}</Box>
+        <Box sx={style}>{children}</Box>
       </Modal>
 
       {isShowModalAlertMessage && (
         <Alert isShowModalAlertMessage={isShowModalAlertMessage} />
       )}
-    </div>
+    </>
   );
 };
 

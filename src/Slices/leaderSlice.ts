@@ -2,10 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../Redux/store";
 import { avatars } from "../images/Avatars/avatars";
 import { addNewLeader, getTopLeaders } from "../api/leadersService";
-import {
-  addFieldAndSort,
-  onSaveScoreLogic,
-} from "../Components/Logic/logicLeaderSlice";
+import { addFieldAndSort, onSaveScoreLogic } from "../Logic/logicLeaderSlice";
 
 export type Leader = {
   name: string;

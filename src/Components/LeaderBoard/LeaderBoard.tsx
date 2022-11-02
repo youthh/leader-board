@@ -17,10 +17,6 @@ const LeaderBoard = () => {
     useAppSelector(leaderSelector);
 
   const changePage = (a: number) => {
-    dispatch(setLeadersLoading(true));
-    setTimeout(() => {
-      dispatch(setLeadersLoading(false));
-    }, 500);
     dispatch(setPage(a));
   };
 

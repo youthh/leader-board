@@ -17,7 +17,7 @@ const Alerts = ({ isShowModalAlertMessage }: AlertProps) => {
         isShowModalAlertMessage && dispatch(closeAlert(false));
       }, 3000);
     }
-  });
+  }, [isShowModalAlertMessage]);
 
   return (
     <Box sx={{ width: `calc(100px + 16px)` }}>

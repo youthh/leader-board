@@ -82,9 +82,7 @@ const ModalAddUser = () => {
         </Button>
       </form>
     </>
-  ) : (
-    <></>
-  );
+  ) : null;
 };
 
 export default ModalAddUser;

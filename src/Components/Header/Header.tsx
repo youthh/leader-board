@@ -1,5 +1,5 @@
 import React from "react";
-import "./header.css";
+import "./_header.css";
 import headerPeople from "../../images/headerPeople.svg";
 import CircularProgress from "@mui/material/CircularProgress/CircularProgress";
 import { useAppSelector } from "../../Redux/hooks";
