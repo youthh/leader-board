@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/leader-board/static/css/main.09802321.css",
+    "main.js": "/leader-board/static/js/main.fb984ea3.js",
+    "static/js/787.a4a518ea.chunk.js": "/leader-board/static/js/787.a4a518ea.chunk.js",
+    "static/media/headerPeople.svg": "/leader-board/static/media/headerPeople.6676aed70646c62d04a4d570cc5dc772.svg",
+    "static/media/ModalBook.svg": "/leader-board/static/media/ModalBook.959ec14d1b5952163a812a28fbfbb960.svg",
+    "static/media/ModalPic.svg": "/leader-board/static/media/ModalPic.e751152f3cff407846718f0be46ed910.svg",
+    "static/media/avatar1.svg": "/leader-board/static/media/avatar1.fea4dc96f325c49c0595a234e0622439.svg",
+    "static/media/avatar6.svg": "/leader-board/static/media/avatar6.f708727328920f679db948bc653f1061.svg",
+    "static/media/avatar2.svg": "/leader-board/static/media/avatar2.493ab407bccd52340c19f2bc73f6badd.svg",
+    "static/media/avatar7.svg": "/leader-board/static/media/avatar7.1bf061a628ad51bbc87d3d0498d47423.svg",
+    "static/media/avatar8.svg": "/leader-board/static/media/avatar8.e21e22ad2034e5373fef28e2edd7864d.svg",
+    "static/media/avatar3.svg": "/leader-board/static/media/avatar3.322ca0b1a7706d2cde78fba4147acadf.svg",
+    "static/media/avatar9.svg": "/leader-board/static/media/avatar9.a1629a1ebb6e0edc63eb9e175c270867.svg",
+    "static/media/avatar4.svg": "/leader-board/static/media/avatar4.a2e5166ecf9af454ce50c77669c3a39f.svg",
+    "static/media/avatar5.svg": "/leader-board/static/media/avatar5.b63f7fc0b0644ea2202699375297692e.svg",
+    "static/media/edit.svg": "/leader-board/static/media/edit.b2be766a5276351c8ddd1f462e833ad2.svg",
+    "static/media/LeftActiveArrow.svg": "/leader-board/static/media/LeftActiveArrow.04277249371d652c3a9fa5c361106819.svg",
+    "static/media/close.svg": "/leader-board/static/media/close.5e6ee7c988848f834aa21799a8459326.svg",
+    "index.html": "/leader-board/index.html",
+    "main.09802321.css.map": "/leader-board/static/css/main.09802321.css.map",
+    "main.fb984ea3.js.map": "/leader-board/static/js/main.fb984ea3.js.map",
+    "787.a4a518ea.chunk.js.map": "/leader-board/static/js/787.a4a518ea.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.09802321.css",
+    "static/js/main.fb984ea3.js"
+  ]
+}
