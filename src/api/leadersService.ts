@@ -3,10 +3,8 @@ import { instance } from "./axiosSetup";
 
 export const getTopLeaders = (counter = 0): Promise<Leader[]> => {
   counter++;
-  if (counter === 5) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    return;
+  if (counter === 4) {
+    return Promise.resolve([]);
   }
   return instance
     .get<Leader[]>("starting-state")
